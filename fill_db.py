@@ -20,6 +20,7 @@ try:
         team.team_id   = int(row["team_id"])
         team.team_name = row["team_name"].decode('utf-8')
         team.series_id = int(row["series_id"])
+        team.series_name = row["series_name"]
         db.session.add(team)
         db.session.commit()
 except Exception as e:

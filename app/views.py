@@ -64,7 +64,7 @@ class MidfieldChartView(GroupByChartView):
             },
         {
             'label': 'League',
-            'group': 'team.series_id',
+            'group': 'team.series_name',
             'series': [(aggregate_sum,'midfield_rating')]
             }
         ]
