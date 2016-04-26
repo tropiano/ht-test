@@ -26,11 +26,21 @@ from flask_appbuilder.models.sqla.filters import FilterStartsWith, FilterEqualFu
 """
 
 
-class MidfieldModelView(ModelView):
+class MidfieldListSerieA(ModelView):
     datamodel = SQLAInterface(Midfield)
-    list_columns = ['team.team_name', 'midfield_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
+    base_filters = [['team.series_name', FilterStartsWith, 'S']]
 
+class MidfieldListII(ModelView):
+    datamodel = SQLAInterface(Midfield)
+    list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
+    base_filters = [['team.series_name', FilterStartsWith, 'II.']]	
 
+class MidfieldListIII(ModelView):
+    datamodel = SQLAInterface(Midfield)
+    list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
+    base_filters = [['team.series_name', FilterStartsWith, 'III.']]
+	
 class DefenceModelView(ModelView):
     datamodel = SQLAInterface(Defence)
     list_columns = ['team.team_name', 'defence_rating', 'match_id']
@@ -42,18 +52,18 @@ class AttackModelView(ModelView):
 class TeamsModelView(ModelView):
     datamodel = SQLAInterface(Team)
     list_columns = ['team_id', 'team_name', 'series_id']
-    related_views = [MidfieldModelView]
+    related_views = [MidfieldListSerieA]
 
 @appbuilder.app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html', base_template=appbuilder.base_template, appbuilder=appbuilder), 404
 
 
-class MidfieldChartView(GroupByChartView):
+class MidfieldChartView(DirectByChartView):
     datamodel = SQLAInterface(Midfield)
     chart_title = 'Midfield Example'
     chart_type = 'Histogram'
-    #base_filters = [['midfield_rating', FilterSmaller, '60']]
+    #base_filters = [['team.team_name', FilterStartsWith, 'A']]
 
     
     definitions = [
@@ -70,7 +80,11 @@ class MidfieldChartView(GroupByChartView):
         ]
     
 appbuilder.add_view(TeamsModelView, "List Teams", icon="fa-folder-open-o", category="Statistics")
-appbuilder.add_view(MidfieldModelView, "List Teams Midfield", icon="fa-folder-open-o", category="Midfield Stats")
+appbuilder.add_view(MidfieldListSerieA, "List Teams Midfield Serie A", icon="fa-folder-open-o", category="Midfield Stats")
+appbuilder.add_view(MidfieldListII, "List Teams Midfield II", icon="fa-folder-open-o", category="Midfield Stats")
+appbuilder.add_view(MidfieldListIII, "List Teams Midfield III", icon="fa-folder-open-o", category="Midfield Stats")
+#appbuilder.add_view(MidfieldListSerieA, "List Teams Midfield", icon="fa-folder-open-o", category="Midfield Stats")
+
 appbuilder.add_view(DefenceModelView, "List Teams Defence", icon="fa-folder-open-o", category="Defence Stats")
 appbuilder.add_view(AttackModelView, "List Teams Attack", icon="fa-folder-open-o", category="Attack Stats")
 appbuilder.add_view(MidfieldChartView, "Show Midfield Chart", icon="fa-dashboard", category="Midfield Stats")
