@@ -1,4 +1,8 @@
 *.pyc
+<<<<<<< HEAD
+=======
+app.db
+>>>>>>> 2d47a4960e1bda2886024fa6f724e218aa830966
 ./tmp
 ./build/*
 ./.idea
