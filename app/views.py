@@ -25,17 +25,19 @@ from flask_appbuilder.models.sqla.filters import FilterStartsWith, FilterEqualFu
     Application wide 404 error handler
 """
 
-
 class MidfieldListSerieA(ModelView):
     datamodel = SQLAInterface(Midfield)
     list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
     base_filters = [['team.series_name', FilterStartsWith, 'S']]
+    base_permissions = ['can_list','can_show']
 
 class MidfieldListII(ModelView):
     datamodel = SQLAInterface(Midfield)
     list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
     base_filters = [['team.series_name', FilterStartsWith, 'II.']]	
+    base_permissions = ['can_list','can_show']
 
+        
 class MidfieldListIII(ModelView):
     datamodel = SQLAInterface(Midfield)
     list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
@@ -59,7 +61,7 @@ def page_not_found(e):
     return render_template('404.html', base_template=appbuilder.base_template, appbuilder=appbuilder), 404
 
 
-class MidfieldChartView(DirectByChartView):
+class MidfieldChartView(GroupByChartView):
     datamodel = SQLAInterface(Midfield)
     chart_title = 'Midfield Example'
     chart_type = 'Histogram'
@@ -84,7 +86,6 @@ appbuilder.add_view(MidfieldListSerieA, "List Teams Midfield Serie A", icon="fa-
 appbuilder.add_view(MidfieldListII, "List Teams Midfield II", icon="fa-folder-open-o", category="Midfield Stats")
 appbuilder.add_view(MidfieldListIII, "List Teams Midfield III", icon="fa-folder-open-o", category="Midfield Stats")
 #appbuilder.add_view(MidfieldListSerieA, "List Teams Midfield", icon="fa-folder-open-o", category="Midfield Stats")
-
 appbuilder.add_view(DefenceModelView, "List Teams Defence", icon="fa-folder-open-o", category="Defence Stats")
 appbuilder.add_view(AttackModelView, "List Teams Attack", icon="fa-folder-open-o", category="Attack Stats")
 appbuilder.add_view(MidfieldChartView, "Show Midfield Chart", icon="fa-dashboard", category="Midfield Stats")
