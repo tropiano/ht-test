@@ -4,7 +4,7 @@ import random
 import pandas as pd
 from app import db
 import sys
-from app.models import Team, Midfield, Attack, Defence
+from app.models import Team, Ratings
 
 log = logging.getLogger(__name__)
 
@@ -28,40 +28,15 @@ except Exception as e:
         db.session.rollback()
 
 try:
-    teams_data = pd.read_csv("static/test_midfield.csv")
+    teams_data = pd.read_csv("static/test_ratings.csv")
     for index, row in teams_data.iterrows():
-        midfield = Midfield()
-        midfield.team_id   = int(row["team_id"])
-        midfield.midfield_rating = int(row["midfield_rating"])
-        midfield.match_id = int(row["match_id"])
-        db.session.add(midfield)
+        team = Ratings()
+        team.team_id   = int(row["team_id"])
+        team.midfield_rating = int(row["midfield_rating"])
+        team.defence_rating= int(row["defence_rating"])
+        team.attack_rating = int(row["attack_rating"])
+        db.session.add(team)
         db.session.commit()
 except Exception as e:
-        log.error("Update ViewMenu error: {0}".format(str(e)))
-        db.session.rollback()
-
-try:
-    teams_data = pd.read_csv("static/test_attack.csv")
-    for index, row in teams_data.iterrows():
-        attack = Attack()
-        attack.team_id   = int(row["team_id"])
-        attack.attack_rating = row["att_rating"]
-        attack.match_id = int(row["match_id"])
-        db.session.add(attack)
-        db.session.commit()
-except Exception as e:
-        log.error("Update ViewMenu error: {0}".format(str(e)))
-        db.session.rollback()
-
-try:
-    teams_data = pd.read_csv("static/test_defence.csv")
-    for index, row in teams_data.iterrows():
-        defence = Defence()
-        defence.team_id   = int(row["team_id"])
-        defence.defence_rating = row["def_rating"]
-        defence.match_id = int(row["match_id"])
-        db.session.add(defence)
-        db.session.commit()
-except Exception as e:
-        log.error("Update ViewMenu error: {0}".format(str(e)))
-        db.session.rollback()
+    log.error("Update ViewMenu error: {0}".format(str(e)))
+    db.session.rollback()

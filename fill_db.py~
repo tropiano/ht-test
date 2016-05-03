@@ -20,6 +20,7 @@ try:
         team.team_id   = int(row["team_id"])
         team.team_name = row["team_name"].decode('utf-8')
         team.series_id = int(row["series_id"])
+        team.series_name = row["series_name"]
         db.session.add(team)
         db.session.commit()
 except Exception as e:
@@ -31,7 +32,7 @@ try:
     for index, row in teams_data.iterrows():
         midfield = Midfield()
         midfield.team_id   = int(row["team_id"])
-        midfield.midfield_rating = row["midfield_rating"]
+        midfield.midfield_rating = int(row["midfield_rating"])
         midfield.match_id = int(row["match_id"])
         db.session.add(midfield)
         db.session.commit()
