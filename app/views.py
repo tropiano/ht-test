@@ -2,8 +2,8 @@ from flask import render_template
 from flask.ext.appbuilder.models.sqla.interface import SQLAInterface
 from flask.ext.appbuilder.charts.views import DirectByChartView, GroupByChartView
 from flask.ext.appbuilder import ModelView
-from models import Team, Midfield, Defence, Attack
-from app import appbuilder, db, fill_db
+from models import Team, Ratings
+from app import appbuilder, db
 from flask.ext.appbuilder.models.group import aggregate_count, aggregate_sum, aggregate_avg
 from flask_appbuilder.models.sqla.filters import FilterStartsWith, FilterEqualFunction, FilterEqual, FilterSmaller
 #from flask import g 
@@ -26,23 +26,23 @@ from flask_appbuilder.models.sqla.filters import FilterStartsWith, FilterEqualFu
 """
 
 class MidfieldListSerieA(ModelView):
-    datamodel = SQLAInterface(Midfield)
+    datamodel = SQLAInterface(Ratings)
     list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
     base_filters = [['team.series_name', FilterStartsWith, 'S']]
     base_permissions = ['can_list','can_show']
 
 class MidfieldListII(ModelView):
-    datamodel = SQLAInterface(Midfield)
+    datamodel = SQLAInterface(Ratings)
     list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
     base_filters = [['team.series_name', FilterStartsWith, 'II.']]	
     base_permissions = ['can_list','can_show']
 
-        
 class MidfieldListIII(ModelView):
-    datamodel = SQLAInterface(Midfield)
+    datamodel = SQLAInterface(Ratings)
     list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
     base_filters = [['team.series_name', FilterStartsWith, 'III.']]
-	
+
+'''	
 class DefenceModelView(ModelView):
     datamodel = SQLAInterface(Defence)
     list_columns = ['team.team_name', 'defence_rating', 'match_id']
@@ -50,6 +50,7 @@ class DefenceModelView(ModelView):
 class AttackModelView(ModelView):
     datamodel = SQLAInterface(Attack)
     list_columns = ['team.team_name', 'attack_rating', 'match_id']
+'''
 
 class TeamsModelView(ModelView):
     datamodel = SQLAInterface(Team)
@@ -61,6 +62,7 @@ def page_not_found(e):
     return render_template('404.html', base_template=appbuilder.base_template, appbuilder=appbuilder), 404
 
 
+'''
 class MidfieldChartView(GroupByChartView):
     datamodel = SQLAInterface(Midfield)
     chart_title = 'Midfield Example'
@@ -80,14 +82,15 @@ class MidfieldChartView(GroupByChartView):
             'series': [(aggregate_sum,'midfield_rating')]
             }
         ]
+'''
     
 appbuilder.add_view(TeamsModelView, "List Teams", icon="fa-folder-open-o", category="Statistics")
 appbuilder.add_view(MidfieldListSerieA, "List Teams Midfield Serie A", icon="fa-folder-open-o", category="Midfield Stats")
 appbuilder.add_view(MidfieldListII, "List Teams Midfield II", icon="fa-folder-open-o", category="Midfield Stats")
 appbuilder.add_view(MidfieldListIII, "List Teams Midfield III", icon="fa-folder-open-o", category="Midfield Stats")
 #appbuilder.add_view(MidfieldListSerieA, "List Teams Midfield", icon="fa-folder-open-o", category="Midfield Stats")
-appbuilder.add_view(DefenceModelView, "List Teams Defence", icon="fa-folder-open-o", category="Defence Stats")
-appbuilder.add_view(AttackModelView, "List Teams Attack", icon="fa-folder-open-o", category="Attack Stats")
-appbuilder.add_view(MidfieldChartView, "Show Midfield Chart", icon="fa-dashboard", category="Midfield Stats")
+#appbuilder.add_view(DefenceModelView, "List Teams Defence", icon="fa-folder-open-o", category="Defence Stats")
+#appbuilder.add_view(AttackModelView, "List Teams Attack", icon="fa-folder-open-o", category="Attack Stats")
+#appbuilder.add_view(MidfieldChartView, "Show Midfield Chart", icon="fa-dashboard", category="Midfield Stats")
 
 

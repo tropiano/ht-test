@@ -29,6 +29,3 @@ def set_sqlite_pragma(dbapi_connection, connection_record):
 """    
 
 from app import views, fill_db
-db.create_all()
-fill_db.fill_teams()
-fill_db.fill_midfield()

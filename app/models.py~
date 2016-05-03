@@ -15,7 +15,8 @@ class Team(Model):
     #team_id = Column(Integer)
     team_name =  Column(String(150), unique=True, nullable=False)
     series_id = Column(Integer)
-
+    series_name = Column(String(20))
+	
     def __repr__(self):
         return self.team_name        
 
