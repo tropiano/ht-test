@@ -49,6 +49,32 @@ class MidfieldListIV(ModelView):
     base_filters = [['team.series_name', FilterStartsWith, 'IV.']]
     base_permissions = ['can_list','can_show']	
 
+class DefenceListSerieA(ModelView):
+    datamodel = SQLAInterface(Ratings)
+    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_id']
+    base_filters = [['team.series_name', FilterStartsWith, 'S']]
+    base_permissions = ['can_list','can_show']
+
+class DefenceListII(ModelView):
+    datamodel = SQLAInterface(Ratings)
+    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_id']
+    base_filters = [['team.series_name', FilterStartsWith, 'II.']]
+    base_permissions = ['can_list','can_show']
+
+class DefenceListIII(ModelView):
+    datamodel = SQLAInterface(Ratings)
+    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_id']
+    base_filters = [['team.series_name', FilterStartsWith, 'III.']]
+    base_permissions = ['can_list','can_show']
+
+class DefenceListIV(ModelView):
+    datamodel = SQLAInterface(Ratings)
+    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_id']
+    base_filters = [['team.series_name', FilterStartsWith, 'IV.']]
+    base_permissions = ['can_list','can_show']
+
+
+
 '''	
 class DefenceModelView(ModelView):
     datamodel = SQLAInterface(Defence)
@@ -61,8 +87,11 @@ class AttackModelView(ModelView):
 
 class TeamsModelView(ModelView):
     datamodel = SQLAInterface(Team)
-    list_columns = ['team_id', 'team_name', 'series_id']
+    list_columns = ['team_id', 'team_name', 'series_name']
     related_views = [MidfieldListSerieA]
+
+
+
 
 @appbuilder.app.errorhandler(404)
 def page_not_found(e):
@@ -79,12 +108,12 @@ class RatingsChartView(DirectByChartView):
     
     definitions = [
         {
-            'label': 'Ratings',
-            'group': 'team.series_name',
+            'label': 'Team',
+            'group': 'team.team_name',
             'series': ['midfield_rating','defence_rating','attack_rating']
         },
 		{
-            'label': 'Ratings',
+            'label': 'Series',
             'group': 'team.series_name',
             'series': ['midfield_rating','defence_rating','attack_rating']
         }
@@ -92,10 +121,16 @@ class RatingsChartView(DirectByChartView):
 
     
 appbuilder.add_view(TeamsModelView, "List Teams", icon="fa-folder-open-o", category="Statistics")
+
 appbuilder.add_view(MidfieldListSerieA, "List Teams Midfield Serie A", icon="fa-folder-open-o", category="Midfield Stats")
 appbuilder.add_view(MidfieldListII, "List Teams Midfield II", icon="fa-folder-open-o", category="Midfield Stats")
 appbuilder.add_view(MidfieldListIII, "List Teams Midfield III", icon="fa-folder-open-o", category="Midfield Stats")
 appbuilder.add_view(MidfieldListIV, "List Teams Midfield IV", icon="fa-folder-open-o", category="Midfield Stats")
+
+appbuilder.add_view(DefenceListSerieA, "List Teams Serie A", icon="fa-folder-open-o", category="Defence Stats")
+appbuilder.add_view(DefenceListII, "List Teams II", icon="fa-folder-open-o", category="Defence Stats")
+appbuilder.add_view(DefenceListIII, "List Teams III", icon="fa-folder-open-o", category="Defence Stats")
+appbuilder.add_view(DefenceListIV, "List Teams IV", icon="fa-folder-open-o", category="Defence Stats")
 #appbuilder.add_view(MidfieldListSerieA, "List Teams Midfield", icon="fa-folder-open-o", category="Midfield Stats")
 #appbuilder.add_view(DefenceModelView, "List Teams Defence", icon="fa-folder-open-o", category="Defence Stats")
 #appbuilder.add_view(AttackModelView, "List Teams Attack", icon="fa-folder-open-o", category="Attack Stats")
