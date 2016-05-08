@@ -73,7 +73,6 @@ class DefenceListIV(ModelView):
     base_filters = [['team.series_name', FilterStartsWith, 'IV.']]
     base_permissions = ['can_list','can_show']
 
-
 class AttackListSerieA(ModelView):
     datamodel = SQLAInterface(Ratings)
     list_columns = ['team.team_name', 'team.series_name','attack_rating', 'match_id']
@@ -123,23 +122,24 @@ def page_not_found(e):
 
 
 
-class RatingsChartView(DirectByChartView):
+class RatingsChartView(GroupByChartView):
     datamodel = SQLAInterface(Ratings)
-    chart_title = 'Ratings Example'
+    chart_title = 'Ratings'
     chart_type = 'Histogram'
     #base_filters = [['team.series_name', FilterStartsWith, 'Serie']]
 
     
     definitions = [
         {
-            'label': 'Team',
-            'group': 'team.team_name',
-            'series': ['midfield_rating','defence_rating','attack_rating']
+            'label': 'Defence/Attack',
+            'group': 'team.series_name',
+            'series': [(aggregate_avg,'defence_rating'),
+                       (aggregate_avg,'attack_rating')]
         },
 		{
-            'label': 'Series',
+            'label': 'Midfield',
             'group': 'team.series_name',
-            'series': ['midfield_rating','defence_rating','attack_rating']
+            'series': [(aggregate_avg,'midfield_rating')]
         }
         ]
 
@@ -164,6 +164,6 @@ appbuilder.add_view(AttackListIV, "List Teams IV", icon="fa-folder-open-o", cate
 #appbuilder.add_view(MidfieldListSerieA, "List Teams Midfield", icon="fa-folder-open-o", category="Midfield Stats")
 #appbuilder.add_view(DefenceModelView, "List Teams Defence", icon="fa-folder-open-o", category="Defence Stats")
 #appbuilder.add_view(AttackModelView, "List Teams Attack", icon="fa-folder-open-o", category="Attack Stats")
-appbuilder.add_view(RatingsChartView, "Show Midfield Chart", icon="fa-dashboard", category="Rating Stats")
+appbuilder.add_view(RatingsChartView, "Rating Charts", icon="fa-dashboard", category="Rating Stats")
 
 
