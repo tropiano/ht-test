@@ -124,7 +124,7 @@ def page_not_found(e):
 
 class RatingsChartView(GroupByChartView):
     datamodel = SQLAInterface(Ratings)
-    chart_title = 'Ratings Example'
+    chart_title = 'Ratings'
     chart_type = 'Histogram'
     #base_filters = [['team.series_name', FilterStartsWith, 'Serie']]
 

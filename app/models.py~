@@ -20,29 +20,11 @@ class Team(Model):
     def __repr__(self):
         return self.team_name        
 
-class Midfield(Model):
+class Ratings(Model):
     id = Column(Integer, primary_key=True)
     match_id = Column(Integer)
     midfield_rating = Column(Integer)
-    team_id = Column(Integer, ForeignKey('team.team_id'), nullable=False)
-    team = relationship("Team")
-
-    def __repr__(self):
-        return self.team_id
-
-class Defence(Model):
-    id = Column(Integer, primary_key=True)
     defence_rating = Column(Integer)
-    match_id = Column(Integer)
-    team_id = Column(Integer, ForeignKey('team.team_id'), nullable=False)
-    team = relationship("Team")
-
-    def __repr__(self):
-        return self.team_id
-
-class Attack(Model):
-    id = Column(Integer, primary_key=True)
-    match_id = Column(Integer)
     attack_rating = Column(Integer)
     team_id = Column(Integer, ForeignKey('team.team_id'), nullable=False)
     team = relationship("Team")

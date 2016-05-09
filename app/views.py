@@ -27,73 +27,73 @@ from flask_appbuilder.models.sqla.filters import FilterStartsWith, FilterEqualFu
 
 class MidfieldListSerieA(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'S']]
     base_permissions = ['can_list','can_show']
 
 class MidfieldListII(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'II.']]	
     base_permissions = ['can_list','can_show']
 
 class MidfieldListIII(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'III.']]
     base_permissions = ['can_list','can_show']
 	
 class MidfieldListIV(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','midfield_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'IV.']]
     base_permissions = ['can_list','can_show']	
 
 class DefenceListSerieA(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'S']]
     base_permissions = ['can_list','can_show']
 
 class DefenceListII(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'II.']]
     base_permissions = ['can_list','can_show']
 
 class DefenceListIII(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'III.']]
     base_permissions = ['can_list','can_show']
 
 class DefenceListIV(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','defence_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'IV.']]
     base_permissions = ['can_list','can_show']
 
 class AttackListSerieA(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','attack_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','attack_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'S']]
     base_permissions = ['can_list','can_show']
 
 class AttackListII(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','attack_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','attack_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'II.']]
     base_permissions = ['can_list','can_show']
 
 class AttackListIII(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','attack_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','attack_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'III.']]
     base_permissions = ['can_list','can_show']
 
 class AttackListIV(ModelView):
     datamodel = SQLAInterface(Ratings)
-    list_columns = ['team.team_name', 'team.series_name','attack_rating', 'match_id']
+    list_columns = ['team.team_name', 'team.series_name','attack_rating', 'match_date']
     base_filters = [['team.series_name', FilterStartsWith, 'IV.']]
     base_permissions = ['can_list','can_show']
 

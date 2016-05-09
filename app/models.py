@@ -1,6 +1,6 @@
 from flask.ext.appbuilder import Model
 from flask.ext.appbuilder.models.mixins import AuditMixin, FileColumn, ImageColumn
-from sqlalchemy import Column, Integer, String, ForeignKey 
+from sqlalchemy import Column, Date, Integer, String, ForeignKey 
 from sqlalchemy.orm import relationship
 """
 
@@ -23,6 +23,7 @@ class Team(Model):
 class Ratings(Model):
     id = Column(Integer, primary_key=True)
     match_id = Column(Integer)
+    match_date = Column(Date)    
     midfield_rating = Column(Integer)
     defence_rating = Column(Integer)
     attack_rating = Column(Integer)

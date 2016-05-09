@@ -1,5 +1,5 @@
 import logging
-import datetime
+from datetime import datetime
 import random
 import pandas as pd
 from app import db
@@ -32,6 +32,7 @@ try:
     for index, row in teams_data.iterrows():
         team = Ratings()
         team.team_id   = int(row["team_id"])
+        team.match_date   = datetime.strptime(row["match_date"],'%Y-%m-%d %H:%M:%S').date()
         team.midfield_rating = int(row["midfield_rating"])
         team.defence_rating= int(row["defence_rating"])
         team.attack_rating = int(row["attack_rating"])
